@@ -1,0 +1,43 @@
+/** Copia UI del motore (non è contenuto didattico: quello sta in game-config). */
+export const COPY = {
+  inizia: "Inizia missione",
+  avanti: "Avanti",
+  riprova: "Riprova",
+  verifica: "Verifica",
+  indizio: "Indizio",
+  indizioUsato: "Indizio usato",
+  chiudiIndizio: "Chiudi indizio",
+  tappaDi: (i, n) => `Tappa ${i} di ${n}`,
+  sblocco: "Sblocco missione",
+  conferma: "Sblocca",
+  tempoScaduto: "Tempo scaduto — la missione continua",
+  corso: "Corso",
+  durata: "Durata",
+  obiettivo: "Cosa imparerete",
+  codiceSbagliato: "Codice non valido. Riprova: nessun game over, solo un altro tentativo.",
+  rispostaSbagliata: "Non è la risposta giusta. Leggi il perché e riprova.",
+  rispostaGiusta: "Risposta corretta",
+  placeholderCodice: "Inserisci qui",
+  formato: "Formato",
+  competenze: "Competenze toccate",
+  puntiDalleTappe: "Cosa avete messo in pratica",
+  nuovaMissione: "Ricomincia",
+  completata: "Missione completata",
+  indietro: "← Indietro",
+  tornaAllaTappa: "← Torna alla tappa precedente",
+  codiceLocker: "Codice locker",
+  codiceLockerIstruzioni: "Inserisci queste 4 cifre nel locker",
+  facilitatore: "Soluzioni stand",
+  facilitatoreChiudi: "Chiudi soluzioni",
+  facilitatoreTitolo: "Pannello facilitatore",
+  corretta: "Corretta",
+  soluzione: "Soluzione",
+  su: "Su",
+  giu: "Giù",
+  prendi: "Seleziona",
+  ordineHint: "Trascina o usa Su/Giù, poi verifica.",
+};
+
+export function letteraOpzione(index) {
+  return String.fromCharCode(65 + index);
+}
