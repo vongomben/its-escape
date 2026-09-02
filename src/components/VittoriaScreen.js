@@ -23,7 +23,10 @@ export function mountVittoriaScreen(parent, { config, hintsUsed, onRestart }) {
       "aria-label": `${COPY.codiceLocker}: ${locker}`,
     });
     for (const cifra of locker.split("")) {
-      digits.append(el("span", { class: "locker__digit" }, cifra));
+      const letter = /[A-Za-z]/.test(cifra);
+      digits.append(
+        el("span", { class: letter ? "locker__digit locker__digit--letter" : "locker__digit" }, cifra),
+      );
     }
     section.append(
       el(

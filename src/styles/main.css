@@ -290,6 +290,20 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+.locker__digits:has(.locker__digit:nth-child(5)) .locker__digit {
+  width: 2.55rem;
+  height: 3.25rem;
+  font-size: 1.85rem;
+}
+
+.locker__digit--letter {
+  width: 2.35rem;
+  background: transparent;
+  color: var(--white);
+  border: 2px solid #7ee0c8;
+  font-variant-numeric: normal;
+}
+
 .locker__help {
   margin: 0.7rem 0 0;
   font-size: 0.98rem;

@@ -193,10 +193,10 @@ export const gameConfig = {
     prompt:
       "L'ERP ha aperto la commessa export. Inserisci il numero d'ordine per sbloccare la spedizione.",
     /**
-     * Codice locker fisico (4 cifre). Cambia da gioco a gioco.
-     * Mostrato in grande nella schermata di vittoria.
+     * Codice locker fisico: M + 4 cifre (Meccatronica).
+     * `valore` resta 4821 (numero d'ordine in gioco).
      */
-    codiceLocker: "4821",
+    codiceLocker: "M4821",
     schermataVittoria: {
       titolo: "Missione compiuta: GustaVera può spedire",
       testo:

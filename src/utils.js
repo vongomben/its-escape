@@ -63,11 +63,14 @@ export function opzioneCorretta(tappa) {
 }
 
 /**
- * Codice a 4 cifre per il locker fisico (cambia da gioco a gioco).
+ * Codice locker fisico: lettera di gruppo + 4 cifre (T turismo, M meccatronica, A digitale).
  * @param {object} config
  * @returns {string}
  */
 export function codiceLocker(config) {
-  const raw = config?.codiceFinale?.codiceLocker ?? config?.codiceFinale?.valore ?? "";
-  return String(raw).replace(/\D/g, "");
+  const raw = String(config?.codiceFinale?.codiceLocker ?? config?.codiceFinale?.valore ?? "")
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g, "");
+  const match = raw.match(/^([A-Z])?(\d{4})$/);
+  return match ? `${match[1] ?? ""}${match[2]}` : raw;
 }

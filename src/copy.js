@@ -26,7 +26,7 @@ export const COPY = {
   indietro: "← Indietro",
   tornaAllaTappa: "← Torna alla tappa precedente",
   codiceLocker: "Codice locker",
-  codiceLockerIstruzioni: "Inserisci queste 4 cifre nel locker",
+  codiceLockerIstruzioni: "Inserisci questo codice nel locker",
   facilitatore: "Soluzioni stand",
   facilitatoreChiudi: "Chiudi soluzioni",
   facilitatoreTitolo: "Pannello facilitatore",

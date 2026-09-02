@@ -5,6 +5,9 @@ Niente backend e niente dati personali: tutto gira nel browser.
 
 Esempio incluso: **Missione: Salva l'azienda!** (Amministrazione, Finanza, Marketing e Internazionalizzazione).
 
+Questo repo è il **motore escape**. Il fratello **ITS Crisis** (`../its-crisis`) è un motore **diverso** (8 alert a tempo + debrief). Non mescolare i due.  
+Report di handoff per un’altra AI: [`../REPORT-AI-MOTORI-ITS.md`](../REPORT-AI-MOTORI-ITS.md) (copia anche in [`REPORT-AI.md`](./REPORT-AI.md)).
+
 ---
 
 ## Avvio in locale
@@ -97,14 +100,14 @@ Nel `feedback` puoi usare `**grassetto**` (es. il numero da segnare: `**EXP-4821
 
 ### 3. Fine missione e locker fisico — `codiceFinale`
 
-Ogni gioco deve **consegnare 4 cifre diverse** per i locker in stand.
+Ogni gioco deve **consegnare lettera + 4 cifre** per i locker in stand. Lettera di gruppo: **T** Turismo, **M** Meccatronica, **A** Accademia Digitale.
 
 ```js
 codiceFinale: {
   valore: "4821",              // da digitare in gioco (sblocco missione)
   formatoAtteso: "4 cifre",
   prompt: "Inserisci il numero d'ordine...",
-  codiceLocker: "4821",        // 4 cifre mostrate in vittoria → locker fisico
+  codiceLocker: "M4821",       // lettera + 4 cifre mostrate in vittoria
   schermataVittoria: {
     titolo: "...",
     testo: "...",
@@ -113,14 +116,14 @@ codiceFinale: {
 }
 ```
 
-- **`codiceLocker`**: obbligatorio per lo stand; **cambia da gioco a gioco** (es. un gioco `4821`, un altro `7391`).
+- **`codiceLocker`**: obbligatorio per lo stand; **cambia da gioco a gioco**. Salva l'azienda usa **`M4821`**. Crisis Room usa **`T7391`**. Non riusarli.
 - `valore` può coincidere con il locker (come in Salva l'azienda) oppure essere un altro indizio interno.
 
 ---
 
 ## Flusso del giocatore (non si configura)
 
-Intro → tappe in ordine (si può **tornare indietro** a rileggere) → inserimento codice di sblocco → schermata vittoria con **codice locker a 4 cifre** e riepilogo competenze.
+Intro → tappe in ordine (si può **tornare indietro** a rileggere) → inserimento codice di sblocco → schermata vittoria con **codice locker (lettera + 4 cifre)** e riepilogo competenze.
 
 Errori: niente game over, solo «riprova».
 
@@ -147,3 +150,16 @@ npm run build
 
 Copia `dist/` nella sottocartella del sito (es. `its-your-future/salva-azienda/`).  
 `vite.config.js` usa `base: "./"` così i file funzionano anche sotto `/nome-gioco/`.
+
+---
+
+## Stato attuale (Salva l'azienda)
+
+| Voce | Valore |
+| --- | --- |
+| Gioco esempio | Missione: Salva l'azienda! — GustaVera (export PMI) |
+| Tappe esempio | 4 quiz (costi-prezzi, mercato, budget, ERP) |
+| Locker fisico | **M4821** (Meccatronica). In gioco si digita ancora `4821` (commessa ERP). |
+| Timer | countdown 420 s; non blocca se scade |
+| Porta dev | `5173` |
+| Remote | https://github.com/vongomben/its-escape (pubblico) |
