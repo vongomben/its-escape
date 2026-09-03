@@ -26,6 +26,13 @@ export const gameConfig = {
     },
   },
 
+  navigazione: {
+    homeUrl: "../",
+    logoSrc: "../img/IT-Y-Flogo.png",
+    percorsoLabel: "percorsi ITS Meccatronica",
+    percorsoUrl: "../meccatronica/",
+  },
+
   tappe: [
     {
       id: "costi-prezzi",

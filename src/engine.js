@@ -1,6 +1,7 @@
 import { gameConfig } from "./data/game-config.js";
 import { COPY } from "./copy.js";
 import { el } from "./dom.js";
+import { mountSiteNav } from "./site-nav.js";
 import { isFacilitatoreMode } from "./utils.js";
 import { mountIntroScreen } from "./components/IntroScreen.js";
 import { mountTappaQuiz } from "./components/TappaQuiz.js";
@@ -18,6 +19,8 @@ import { mountFacilitatorePanel } from "./components/FacilitatorePanel.js";
  * @param {typeof gameConfig} [config]
  */
 export function createGame(root, config = gameConfig) {
+  mountSiteNav(config.navigazione ?? config.meta?.navigazione);
+
   const tappe = config.tappe ?? [];
   const timerConf = config.meta?.timer ?? { modalita: "countdown", secondi: 420 };
 
