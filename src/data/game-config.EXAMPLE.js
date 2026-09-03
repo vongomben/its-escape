@@ -29,7 +29,7 @@ export const gameConfig = {
   navigazione: {
     homeUrl: "../",
     logoSrc: "../img/IT-Y-Flogo.png",
-    percorsoLabel: "percorsi ITS Meccatronica",
+    percorsoLabel: "percorsi ITS Meccatronica e Servizi all'Impresa",
     percorsoUrl: "../meccatronica/",
   },
 
