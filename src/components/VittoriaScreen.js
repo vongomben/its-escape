@@ -1,6 +1,6 @@
 import { el } from "../dom.js";
 import { COPY } from "../copy.js";
-import { codiceLocker } from "../utils.js";
+import { codiceLocker, renderSceneArt } from "../utils.js";
 
 /**
  * Schermata vittoria: codice locker (4 cifre) + competenze.
@@ -11,6 +11,8 @@ export function mountVittoriaScreen(parent, { config, hintsUsed, onRestart }) {
   const vittoria = config.codiceFinale?.schermataVittoria ?? {};
   const locker = codiceLocker(config);
   const section = el("section", { class: "victory" });
+  const art = renderSceneArt(vittoria.immagine, vittoria.immagineAlt);
+  if (art) section.append(art);
 
   section.append(
     el("p", { class: "victory__kicker" }, COPY.completata),

@@ -1,5 +1,6 @@
 import { el } from "../dom.js";
 import { COPY } from "../copy.js";
+import { renderSceneArt } from "../utils.js";
 
 /**
  * @param {HTMLElement} parent
@@ -8,6 +9,8 @@ import { COPY } from "../copy.js";
 export function mountIntroScreen(parent, { config, onStart }) {
   const { meta } = config;
   const section = el("section", { class: "intro" });
+  const art = renderSceneArt(meta.immagine, meta.immagineAlt);
+  if (art) section.append(art);
 
   section.append(
     el("p", { class: "intro__kicker" }, "ITS · mini-missione"),

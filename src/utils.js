@@ -1,3 +1,5 @@
+import { el } from "./dom.js";
+
 /** @param {unknown} value */
 export function normalizeAnswer(value) {
   return String(value ?? "")
@@ -46,6 +48,21 @@ export function assetUrl(path) {
   if (/^https?:\/\//i.test(path)) return path;
   const base = import.meta.env.BASE_URL || "./";
   return `${base}${String(path).replace(/^\//, "")}`;
+}
+
+/** Immagine di scena (intro / tappa / esito). Se manca il file, si nasconde. */
+export function renderSceneArt(src, alt) {
+  if (!src) return null;
+  const img = el("img", {
+    class: "scene-art",
+    src: assetUrl(src),
+    alt: alt || "",
+    width: "1200",
+    height: "400",
+    decoding: "async",
+  });
+  img.addEventListener("error", () => img.remove());
+  return img;
 }
 
 /** @param {unknown[]} list */

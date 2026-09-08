@@ -1,5 +1,5 @@
 import { el } from "../dom.js";
-import { assetUrl } from "../utils.js";
+import { renderSceneArt } from "../utils.js";
 
 /**
  * @param {object} tabella
@@ -44,18 +44,11 @@ export function mountTappaFrame(parent, { tappa, onBack, backLabel }) {
     back.addEventListener("click", onBack);
     article.append(back);
   }
+  const art = renderSceneArt(tappa.immagine, tappa.immagineAlt);
+  if (art) article.append(art);
   article.append(el("h2", { class: "tappa__title" }, tappa.titolo ?? ""));
   if (tappa.testo) {
     article.append(el("p", { class: "tappa__text" }, tappa.testo));
-  }
-  if (tappa.immagine) {
-    const img = el("img", {
-      class: "tappa__img",
-      src: assetUrl(tappa.immagine),
-      alt: "",
-    });
-    img.addEventListener("error", () => img.remove());
-    article.append(img);
   }
   const tabella = renderTabella(tappa.tabella);
   if (tabella) article.append(tabella);

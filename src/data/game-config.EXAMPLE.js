@@ -19,6 +19,9 @@ export const gameConfig = {
       "Collegare costi-prezzi, scelta del mercato estero, budget di cassa e ruolo di un ERP in una decisione export di una PMI.",
     contestoNarrativo:
       "Siete il team di controllo di GustaVera, piccola impresa italiana che produce una bevanda artigianale alle erbe. La direzione vuole esportare entro l'anno. Avete i fogli costi, i mercati candidati, il budget e l'accesso al gestionale. In pochi minuti dovete evitare una decisione che brucia cassa — e sbloccare la spedizione del primo lotto.",
+    immagine: "img/00.jpg",
+    immagineAlt:
+      "Il team di controllo di GustaVera in ufficio, con bottiglie, fogli costi e la domanda Export?",
     timer: {
       /** "countdown" = tensione da fiera; "chrono" = cronometro crescente */
       modalita: "countdown",
@@ -38,6 +41,9 @@ export const gameConfig = {
       id: "costi-prezzi",
       titolo: "Il prezzo non mente",
       tipo: "quiz",
+      immagine: "img/01.jpg",
+      immagineAlt:
+        "Costo pieno 1,50 € contro l’offerta buyer 1,35 €: il prezzo è sotto costo",
       testo:
         "Un buyer tedesco offre 1,35 € a bottiglia, franco fabbrica. Guardando i costi, cosa fate?",
       tabella: {
@@ -81,6 +87,9 @@ export const gameConfig = {
       id: "mercato-estero",
       titolo: "Dove sbarcare prima",
       tipo: "quiz",
+      immagine: "img/02.jpg",
+      immagineAlt:
+        "Primo mercato: Germania in UE, senza dazi, rispetto a Francia e Stati Uniti",
       testo:
         "GustaVera esporta per la prima volta e ha cassa limitata. Qual è il primo mercato più razionale?",
       tabella: {
@@ -121,6 +130,9 @@ export const gameConfig = {
       id: "budget-export",
       titolo: "Il budget non è un desiderio",
       tipo: "quiz",
+      immagine: "img/03.jpg",
+      immagineAlt:
+        "Cassa 12.000 € contro un piano da 17.700 €: priorità a certificazioni e campionature",
       testo:
         "Il piano «facciamo tutto questo trimestre» costa 17.700 €. In cassa ci sono 12.000 €. Come procedete?",
       tabella: {
@@ -164,6 +176,9 @@ export const gameConfig = {
       id: "erp",
       titolo: "Un solo cruscotto",
       tipo: "quiz",
+      immagine: "img/04.jpg",
+      immagineAlt:
+        "Da fogli e WhatsApp sparsi a un unico ERP: magazzino, fatture, costi e spedizioni",
       testo:
         "Oggi i costi sono su un foglio, gli ordini su WhatsApp, le fatture sul gestionale del commercialista. Per l'ordine export serve un sistema che tenga insieme magazzino, costi, documenti e spedizioni. A cosa serve un ERP in questa missione?",
       opzioni: [
@@ -206,6 +221,9 @@ export const gameConfig = {
     codiceLocker: "M4821",
     schermataVittoria: {
       titolo: "Missione compiuta: GustaVera può spedire",
+      immagine: "img/05.jpg",
+      immagineAlt:
+        "Cartone GustaVera pronto per la spedizione, rotta Italia–Germania e checklist completa",
       testo:
         "Avete evitato la vendita sotto costo, scelto un primo mercato sostenibile, tenuto la cassa in piedi e capito a cosa serve un ERP. Questo è il lavoro quotidiano di chi studia amministrazione, controllo di gestione, marketing e internazionalizzazione.",
       competenzeEvidenziate: [
