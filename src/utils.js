@@ -78,16 +78,3 @@ export function shuffleCopy(list) {
 export function opzioneCorretta(tappa) {
   return (tappa?.opzioni ?? []).find((o) => o.corretta);
 }
-
-/**
- * Codice locker fisico: lettera di gruppo + 4 cifre (T turismo, M meccatronica, A digitale).
- * @param {object} config
- * @returns {string}
- */
-export function codiceLocker(config) {
-  const raw = String(config?.codiceFinale?.codiceLocker ?? config?.codiceFinale?.valore ?? "")
-    .toUpperCase()
-    .replace(/[^A-Z0-9]/g, "");
-  const match = raw.match(/^([A-Z])?(\d{4})$/);
-  return match ? `${match[1] ?? ""}${match[2]}` : raw;
-}

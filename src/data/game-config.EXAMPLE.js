@@ -214,11 +214,6 @@ export const gameConfig = {
     formatoAtteso: "4 cifre",
     prompt:
       "L'ERP ha aperto la commessa export. Inserisci il numero d'ordine per sbloccare la spedizione.",
-    /**
-     * Codice locker fisico: M + 4 cifre (Meccatronica).
-     * `valore` resta 4821 (numero d'ordine in gioco).
-     */
-    codiceLocker: "M4821",
     schermataVittoria: {
       titolo: "Missione compiuta: GustaVera può spedire",
       immagine: "img/05.jpg",
@@ -272,7 +267,7 @@ export default gameConfig;
  *   puntiChiave: "...",
  * }
  *
- * codiceFinale.codiceLocker = "4821"  // 4 cifre per il locker fisico (obbligatorio, diverso per ogni gioco)
+ * punteggio: { soglie: [0, 1, 3, 5] }  // opzionale: errori + indizi massimi per 5, 4, 3, 2 stelle
  *
  * Immagine opzionale su qualsiasi tappa: immagine: "img/scheda.png"
  * (file in /public/img/)

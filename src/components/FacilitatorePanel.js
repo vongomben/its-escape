@@ -1,6 +1,6 @@
 import { el } from "../dom.js";
 import { COPY } from "../copy.js";
-import { opzioneCorretta, codiceLocker } from "../utils.js";
+import { opzioneCorretta } from "../utils.js";
 
 /**
  * Pannello soluzioni per chi gestisce lo stand (?facilitatore=1).
@@ -18,12 +18,7 @@ export function mountFacilitatorePanel(parent, { config }) {
     el("p", { class: "facilitatore__lead" }, config.meta?.titolo ?? ""),
   );
 
-  const locker = codiceLocker(config);
-  if (locker) {
-    panel.append(
-      el("p", { class: "facilitatore__code facilitatore__code--locker" }, `${COPY.codiceLocker}: ${locker}`),
-    );
-  }
+  panel.append(el("p", { class: "facilitatore__lead" }, COPY.regolaStelle));
 
   const list = el("ol", { class: "facilitatore__list" });
   for (const tappa of config.tappe ?? []) {

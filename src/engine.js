@@ -30,6 +30,8 @@ export function createGame(root, config = gameConfig) {
     hintsUsed: /** @type {Record<string, boolean>} */ ({}),
     solvedIds: /** @type {Record<string, boolean>} */ ({}),
     reachedFinale: false,
+    /** Risposte sbagliate su tappe e codice finale: con gli indizi fanno il punteggio a stelle. */
+    errors: 0,
   };
 
   let unmountScreen = () => {};
@@ -92,6 +94,10 @@ export function createGame(root, config = gameConfig) {
     renderProgress();
   }
 
+  function countError() {
+    state.errors += 1;
+  }
+
   function pickMount(tappa) {
     if (tappa.tipo === "enigma" && tappa.opzioni?.length) {
       return mountTappaQuiz;
@@ -115,6 +121,7 @@ export function createGame(root, config = gameConfig) {
     state.hintsUsed = {};
     state.solvedIds = {};
     state.reachedFinale = false;
+    state.errors = 0;
     timerApi?.destroy();
     timerApi = null;
     timerMount.replaceChildren();
@@ -170,6 +177,7 @@ export function createGame(root, config = gameConfig) {
         review: Boolean(state.solvedIds[tappa.id]),
         onHint: () => useHint(tappa.id),
         onSolved: nextAfterTappa,
+        onError: countError,
         onBack: canGoBack ? goBack : undefined,
         backLabel: COPY.indietro,
       }),
@@ -206,6 +214,7 @@ export function createGame(root, config = gameConfig) {
         soluzione: config.codiceFinale.valore,
         formatoAtteso: config.codiceFinale.formatoAtteso,
         onSolved: goVittoria,
+        onError: countError,
         onBack: tappe.length ? goBack : undefined,
         backLabel: COPY.tornaAllaTappa,
         wrongMessage: COPY.codiceSbagliato,
@@ -220,6 +229,7 @@ export function createGame(root, config = gameConfig) {
       mountVittoriaScreen(screenMount, {
         config,
         hintsUsed: state.hintsUsed,
+        errors: state.errors,
         onRestart: goIntro,
       }),
     );

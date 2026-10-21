@@ -12,11 +12,12 @@ import { mountFeedbackBox } from "./FeedbackBox.js";
  *   review?: boolean,
  *   onHint: () => void,
  *   onSolved: () => void,
+ *   onError?: () => void,
  *   onBack?: () => void,
  *   backLabel?: string,
  * }} props
  */
-export function mountTappaQuiz(parent, { tappa, hintUsed, review = false, onHint, onSolved, onBack, backLabel }) {
+export function mountTappaQuiz(parent, { tappa, hintUsed, review = false, onHint, onSolved, onError, onBack, backLabel }) {
   const frame = mountTappaFrame(parent, { tappa, onBack, backLabel });
   mountHintButton(frame.hintMount, {
     used: hintUsed,
@@ -60,6 +61,7 @@ export function mountTappaQuiz(parent, { tappa, hintUsed, review = false, onHint
           onCta: onSolved,
         });
       } else {
+        onError?.();
         btn.classList.add("is-wrong");
         btn.disabled = true;
         mountFeedbackBox(frame.feedbackMount, {

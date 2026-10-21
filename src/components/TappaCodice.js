@@ -18,6 +18,7 @@ import { mountFeedbackBox } from "./FeedbackBox.js";
  *   review?: boolean,
  *   onHint?: () => void,
  *   onSolved: () => void,
+ *   onError?: () => void,
  *   onBack?: () => void,
  *   backLabel?: string,
  *   wrongMessage?: string,
@@ -80,6 +81,7 @@ export function mountTappaCodice(parent, props) {
         onCta: props.onSolved,
       });
     } else {
+      props.onError?.();
       mountFeedbackBox(frame.feedbackMount, {
         ok: false,
         testo: props.wrongMessage || tappa.feedbackErrato || COPY.codiceSbagliato,

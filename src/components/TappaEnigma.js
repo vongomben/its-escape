@@ -14,11 +14,12 @@ import { mountFeedbackBox } from "./FeedbackBox.js";
  *   review?: boolean,
  *   onHint: () => void,
  *   onSolved: () => void,
+ *   onError?: () => void,
  *   onBack?: () => void,
  *   backLabel?: string,
  * }} props
  */
-export function mountTappaEnigma(parent, { tappa, hintUsed, review = false, onHint, onSolved, onBack, backLabel }) {
+export function mountTappaEnigma(parent, { tappa, hintUsed, review = false, onHint, onSolved, onError, onBack, backLabel }) {
   const frame = mountTappaFrame(parent, { tappa, onBack, backLabel });
   mountHintButton(frame.hintMount, {
     used: hintUsed,
@@ -57,6 +58,7 @@ export function mountTappaEnigma(parent, { tappa, hintUsed, review = false, onHi
         onCta: onSolved,
       });
     } else {
+      onError?.();
       mountFeedbackBox(frame.feedbackMount, {
         ok: false,
         testo: tappa.feedbackErrato || COPY.rispostaSbagliata,

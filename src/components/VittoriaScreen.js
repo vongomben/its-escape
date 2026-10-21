@@ -1,15 +1,31 @@
 import { el } from "../dom.js";
 import { COPY } from "../copy.js";
-import { codiceLocker, renderSceneArt } from "../utils.js";
+import { renderSceneArt } from "../utils.js";
+import { calcolaStelle, stelleElement } from "../stelle.js";
 
 /**
- * Schermata vittoria: codice locker (4 cifre) + competenze.
- * @param {HTMLElement} parent
- * @param {{ config: object, hintsUsed: Record<string, boolean>, onRestart: () => void }} props
+ * Errori + indizi → stelle: 0 → 5, 1 → 4, 2–3 → 3, 4–5 → 2, 6+ → 1.
+ * Sovrascrivibile da config.punteggio.soglie.
  */
-export function mountVittoriaScreen(parent, { config, hintsUsed, onRestart }) {
+export const SOGLIE_STELLE = [0, 1, 3, 5];
+
+function dettaglioPunteggio(errori, indizi) {
+  const parti = [
+    errori === 0 ? COPY.nessunErrore : `${errori} ${errori === 1 ? COPY.errore : COPY.errori}`,
+    indizi === 0 ? COPY.nessunIndizio : `${indizi} ${indizi === 1 ? COPY.indizioSingolare : COPY.indiziPlurale}`,
+  ];
+  return parti.join(" · ");
+}
+
+/**
+ * Schermata vittoria: punteggio a stelle + competenze.
+ * @param {HTMLElement} parent
+ * @param {{ config: object, hintsUsed: Record<string, boolean>, errors: number, onRestart: () => void }} props
+ */
+export function mountVittoriaScreen(parent, { config, hintsUsed, errors = 0, onRestart }) {
   const vittoria = config.codiceFinale?.schermataVittoria ?? {};
-  const locker = codiceLocker(config);
+  const indizi = Object.values(hintsUsed).filter(Boolean).length;
+  const stelle = calcolaStelle(errors + indizi, config.punteggio?.soglie ?? SOGLIE_STELLE);
   const section = el("section", { class: "victory" });
   const art = renderSceneArt(vittoria.immagine, vittoria.immagineAlt);
   if (art) section.append(art);
@@ -19,27 +35,7 @@ export function mountVittoriaScreen(parent, { config, hintsUsed, onRestart }) {
     el("h1", { class: "victory__title" }, vittoria.titolo || COPY.completata),
   );
 
-  if (locker) {
-    const digits = el("div", {
-      class: "locker__digits",
-      "aria-label": `${COPY.codiceLocker}: ${locker}`,
-    });
-    for (const cifra of locker.split("")) {
-      const letter = /[A-Za-z]/.test(cifra);
-      digits.append(
-        el("span", { class: letter ? "locker__digit locker__digit--letter" : "locker__digit" }, cifra),
-      );
-    }
-    section.append(
-      el(
-        "div",
-        { class: "locker" },
-        el("p", { class: "locker__label" }, COPY.codiceLocker),
-        digits,
-        el("p", { class: "locker__help" }, COPY.codiceLockerIstruzioni),
-      ),
-    );
-  }
+  section.append(stelleElement(stelle, dettaglioPunteggio(errors, indizi)));
 
   if (vittoria.testo) {
     section.append(el("p", { class: "victory__text" }, vittoria.testo));

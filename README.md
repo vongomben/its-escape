@@ -40,7 +40,7 @@ Pannello soluzioni per chi gestisce lo stand: aggiungi `?facilitatore=1` all’U
 
 | Cosa vuoi cambiare | File | Note |
 | --- | --- | --- |
-| Titolo, storia, corso, tappe, quiz, codice locker | **`src/data/game-config.js`** | File da editare per un gioco nuovo |
+| Titolo, storia, corso, tappe, quiz, codice di sblocco | **`src/data/game-config.js`** | File da editare per un gioco nuovo |
 | Esempio già pronto (Salva l'azienda) | `src/data/game-config.EXAMPLE.js` | Copialo / usalo come modello |
 | Immagini delle tappe | `public/img/` | In config: `"img/nome.png"` |
 | Etichette fisse UI («Inizia missione», «Indizio»…) | `src/copy.js` | Solo se vuoi cambiare la lingua del **motore**, non la missione |
@@ -52,7 +52,7 @@ Oggi `game-config.js` re-esporta l’esempio. Per un **gioco nuovo**:
 
 1. Apri `src/data/game-config.EXAMPLE.js` e copiane il contenuto.
 2. Incollalo in `src/data/game-config.js` al posto del re-export (togli le due righe `export { gameConfig } from ...`).
-3. Modifica testi, tappe e **codice locker**.
+3. Modifica testi, tappe e **codice di sblocco**.
 4. Salva e ricarica `npm run dev`.
 
 ---
@@ -98,16 +98,13 @@ Nel `feedback` puoi usare `**grassetto**` (es. il numero da segnare: `**EXP-4821
 
 **Puzzle-drag:** `elementi: [{ id, testo }]` e `ordineCorretto: ["id1", "id2", ...]`.
 
-### 3. Fine missione e locker fisico — `codiceFinale`
-
-Ogni gioco deve **consegnare lettera + 4 cifre** per i locker in stand. Lettera di gruppo: **T** Turismo, **M** Meccatronica, **A** Accademia Digitale.
+### 3. Fine missione e punteggio — `codiceFinale`
 
 ```js
 codiceFinale: {
   valore: "4821",              // da digitare in gioco (sblocco missione)
   formatoAtteso: "4 cifre",
   prompt: "Inserisci il numero d'ordine...",
-  codiceLocker: "M4821",       // lettera + 4 cifre mostrate in vittoria
   schermataVittoria: {
     titolo: "...",
     testo: "...",
@@ -116,14 +113,13 @@ codiceFinale: {
 }
 ```
 
-- **`codiceLocker`**: obbligatorio per lo stand; **cambia da gioco a gioco**. Salva l'azienda usa **`M4821`**. Crisis Room usa **`T7391`**. Non riusarli.
-- `valore` può coincidere con il locker (come in Salva l'azienda) oppure essere un altro indizio interno.
+La vittoria mostra **da 1 a 5 stelle**, calcolate su errori + indizi usati: ogni risposta sbagliata (quiz, enigma, puzzle, codice finale) conta 1, ogni indizio aperto conta 1. Soglie predefinite `[0, 1, 3, 5]`: 0 → 5 stelle, 1 → 4, 2–3 → 3, 4–5 → 2, 6 o più → 1. Si possono cambiare con `punteggio: { soglie: [...] }` nella config. Lo staff segna le stelle a mano nella classifica.
 
 ---
 
 ## Flusso del giocatore (non si configura)
 
-Intro → tappe in ordine (si può **tornare indietro** a rileggere) → inserimento codice di sblocco → schermata vittoria con **codice locker (lettera + 4 cifre)** e riepilogo competenze.
+Intro → tappe in ordine (si può **tornare indietro** a rileggere) → inserimento codice di sblocco → schermata vittoria con **punteggio a stelle** e riepilogo competenze.
 
 Errori: niente game over, solo «riprova».
 
@@ -159,7 +155,7 @@ Copia `dist/` nella sottocartella del sito (es. `its-your-future/salva-azienda/`
 | --- | --- |
 | Gioco esempio | Missione: Salva l'azienda! — GustaVera (export PMI) |
 | Tappe esempio | 4 quiz (costi-prezzi, mercato, budget, ERP) |
-| Locker fisico | **M4821** (Meccatronica). In gioco si digita ancora `4821` (commessa ERP). |
+| Punteggio | 1–5 stelle su errori + indizi. Codice di sblocco in gioco: `4821` (commessa ERP). |
 | Timer | countdown 420 s; non blocca se scade |
 | Porta dev | `5173` |
 | Remote | https://github.com/vongomben/its-escape (pubblico) |
